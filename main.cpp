@@ -2,49 +2,23 @@
 Unionize the Devs! Final Project
 Members: Jacob Weldon, Amanda Cordray, Kyle Nguyen, Brayden Steffen
 Title: Home Construction Cost Estimator
- */
-/* Solution Requirements
-3. Use at least two files in your application
-6. Validation testing
-    -Develop an appropriate set of test data to fully validate the program against
-    -The data sets you tested against
-    -A brief written explanation of the results of your tests and what you had to fix
-    -Screen shots of your good test data working
-7. User manual
-    -You will write and submit a User's Manual for your final project and submit it according to the instructions in the attached file.
-8. Documentation of the source code
-    -You will fully document (comment) the C++ source code with appropriate comments including:
-        -A brief explanation of the purpose of each moduel (Sub) at the beginning of each Sub. (A header's comment)
-        -Explanation of the purpose of each variable where it is declared. (An end line comment)
-        -Line by line, or at least section by section comments within the code, explaining wha the line/section does.
 https://github.com/BluePayment7/Home-Construction-Cost-Estimator
+ */
 
-Main Menu (Enter Material Info, Print Report to Terminal, Save to Text File, Exit Program)
-Enter Material Info (string materialName, int quantity, double unitPrice)
-	Runs setMaterial(str…,int…,double…)
-	Print Report to Terminal(class Materials[])
-		Outputs all materials entered, their total cost, and total estimate
-	Save to Text File(class Materials[])
-		Saves all information and estimates to a text file
-	Exit Program(0)
-
-
-The program will ask for inputs:
-the material name
-the quantity of the material
-the unit price
-The program will output:
- a table displaying all the entered information
-save the information to a file
-calculate the total estimated cost
-display the total estimated cost
-Additional features will be added as the project progresses
+/* 
+This program runs on a desktop computer from the terminal and provides a material cost estimate reporting tool that can output to the terminal directly, 
+or have it saved as a home_estimator_report.txt file. The program will prompt the client to add in the name, quantity, and unit price for each material 
+that will be a part of the estimation. Once all items have been entered into the program, the client will see the report printed to the screen and a backup 
+text file will be saved of that estimation. 
+The program starts by displaying the main menu of choices. There are 6 choices in total.
+Enter 1 to add material
+Enter 2 to print report to screen
+Enter 3 to save report to the text file home_estimator_report.txt
+Enter 4 to clear material list
+Enter 5 to view list of common construction materials
+Enter 9 to terminate the program
 */
-/* Upload a zip file of your Group Project, please name the Group Project folder 'GPSolution.zip' (65 points)
-Validation testing (10 points)
-User manual creation (10 points)
-Documentation of source code (10 points)
-The link to the GitHub repository for Group Project (5 points) */
+
 //header files
 #include <iostream>
 #include <string>
@@ -64,6 +38,7 @@ conObj materialList[500];
 int welcome();
 void menu(int);
 void enterInfo();
+void exampleFile();
 
 int count = 0;//to index array for object storage
 
@@ -83,6 +58,7 @@ int welcome() {
                   "\nEnter 2 to print the report to the screen."
                   "\nEnter 3 to save the report to a text file."
                   "\nEnter 4 to reset the program and start again with an empty material list."
+                  "\nEnter 5 to see a list of common construction materials."
                   "\nEnter 9 to terminate the program."
                   "\n*************************************************************************************************";
     cout << temp << endl;//print menu to screen
@@ -92,7 +68,7 @@ int welcome() {
     { // if the user selects number 9 terminate the program
         exit(0);
     }
-    if (num != 1 && num != 2 && num != 3 && num != 4) {
+    if (num != 1 && num != 2 && num != 3 && num != 4 && num != 5) {
         welcome();//if the user enters an invalid number, call the function again to allow an appropriate choice
     }
     return num;//returns the number of the user's choice
@@ -113,7 +89,13 @@ void menu(int num) {
     }
     else if (num == 4) {
         repList.clearList(materialList);//choice four clears the list so the user can start again
-    } else
+        count = 0;
+    }
+    else if (num == 5)
+    {
+        exampleFile();
+    }
+    else
     {
         cout << "Error in menu selection" << endl;//In case there was an error during programming...
     }
@@ -141,4 +123,18 @@ void enterInfo() {
         cin >> choice;//user enters their choice
     }
     main();//takes the user back the main menu
+}
+
+void exampleFile() {
+//read from file and output to the screen a list of common materials and their associated price per unit 
+    string line;//cin variables
+    ifstream inData;// open input data stream
+    inData.open("common_materials.txt");//open text file
+    if (inData.is_open()) {//checks to make sure that the input scream is open
+        while (inData.peek() != EOF) {//make sure to continue printing until reaching the end of the file
+            getline(inData, line);//gets the line from inData
+            cout << line << endl;//prints line to console. 
+        }
+    }
+    inData.close();
 }
