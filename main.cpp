@@ -91,7 +91,7 @@ void menu(int num) {
         repList.clearList(materialList);//choice four clears the list so the user can start again
         count = 0;
     }
-    else if (num == 5)
+    else if (num == 5)//choice calls forth a text file and prints the data to the screen.
     {
         exampleFile();
     }
@@ -106,7 +106,6 @@ void enterInfo() {
     string name;//material name
     int quan;//material quantity
     double price;//material price
-    
     //The following while loop is to cycle and add materials to materialList until the user types anything other than y
     char choice = 'y';
     while (choice == 'y') {

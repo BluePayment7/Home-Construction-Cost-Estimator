@@ -1,0 +1,10 @@
+Nails       $0.07
+2x4s        $5.50
+bricks      $3.98
+shingles    $78.20
+OSB         $12.15
+insulation  $42.33
+drywall     $18.72
+screws      $0.09
+siding      $7.00
+brackets    $0.54
